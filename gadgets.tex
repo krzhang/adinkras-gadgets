@@ -1,0 +1,237 @@
+\documentclass[12pt,twoside,singlespace]{amsart}
+\pagestyle{plain}
+
+\usepackage{array, paralist, enumerate, amsmath, amsfonts, amssymb, amscd, color, mathrsfs,comment}
+\usepackage{amsthm} % place after to make qedhere work
+%\usepackage{times}
+
+\usepackage{geometry}
+\usepackage{framed}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage[all,cmtip]{xy}
+\usepackage{tikz}
+\usepackage{tkz-graph}
+\usetikzlibrary{arrows,%
+                shapes,positioning}
+
+\definecolor{DarkBlue}{rgb}{0,0,0.8} 
+\definecolor{DarkGreen}{rgb}{0,0.5,0.0} 
+\definecolor{DarkRed}{rgb}{0.9,0.0,0.0} 
+
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+%\usepackage[inline]{showlabels}
+
+\newtheorem*{thm*}{Theorem}
+
+\numberwithin{equation}{section}
+\newtheorem{thm}[equation]{Theorem}
+\newtheorem{lem}[equation]{Lemma}
+\newtheorem{cor}[equation]{Corollary}
+\newtheorem{prop}[equation]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}[equation]{Definition}
+\newtheorem{ex}[equation]{Example}	
+\newtheorem{remark}[equation]{Remark}
+\newtheorem{prob}{Problem}
+\newtheorem{construction}[equation]{Construction}
+\newtheorem{conjecture}[equation]{Conjecture}
+
+\newcommand{\BB}{\mathbf{B}}
+\newcommand{\ZZ}{\mathbf{Z}}
+\newcommand{\NN}{\mathbf{N}}
+\newcommand{\RR}{\mathbf{R}}
+\newcommand{\QQ}{\mathbf{Q}}
+\newcommand{\CC}{\mathbf{C}}
+\newcommand{\FF}{\mathbf{F}}
+\newcommand{\N}{N}
+\newcommand{\po}[2]{\mathfrak{po}^{#1|#2}}
+\newcommand{\on}{\operatorname}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\ul}{\underline}
+\newcommand{\ol}{\overline}
+\newcommand{\nin}{\noindent}
+
+\newcommand{\simple}{\text{simple}}
+\newcommand{\Img}{\on{Im}}
+\newcommand{\con}{\on{Con}}
+\newcommand{\dash}{\on{Dash}}
+
+\geometry{verbose,letterpaper,tmargin=1in}
+
+\newcommand{\Q}{\overline{q}}
+\newcommand{\w}{\on{weight}}
+
+\newcommand{\val}{\on{Val}}
+\newcommand{\smon}{\mathbf{SMon}}
+\newcommand{\clif}{\on{clif}}
+\newcommand{\cl}{\mathbf{Cl}}
+%\newcommand{\mov}[2]{\on{mov}_{#2}(#1)}
+\newcommand{\inc}{\on{inc}}
+\newcommand{\cut}[4]{#1 = #2 \amalg_{#4} #3}
+\newcommand{\cutr}[3]{#1 \amalg_{#3} #2}
+%\newcommand{\piece}[3]{#1(#2|#3)}
+\newcommand{\piece}[3]{#1_{#3}}
+\newcommand{\wt}{\on{wt}}
+
+\newcommand{\com}[1]{\textcolor{red}{$[\star \star \star$ #1 $\star \star \star]$}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Bold symbol macro for standard LaTeX users
+\providecommand{\boldsymbol}[1]{\mbox{\boldmath $#1$}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+%\renewcommand{\labelenumi}{(\alph{enumi})}
+%\renewcommand{\labelenumii}{(\roman{enumii})}
+
+%\usepackage{babel}
+%github version
+
+\title{On Understanding Gadgets in $2$-d Adinkras}
+\author{Kevin Iga}
+\address{Kevin Iga,
+Natural Science Division,
+	24255 Pacific Coast Hwy.,
+      Pepperdine University,
+      Malibu, CA 90263}
+\email{kiga@pepperdine.edu}
+\author{Yan X Zhang}
+\address{Yan X Zhang,
+Dept. of Mathematics,
+San Jose State University,
+etc.
+etc.}
+\email{yanzhang@math.berkeley.edu}
+
+\begin{document}
+
+\pagestyle{plain}
+
+
+\begin{abstract}
+Adinkras are combinatorial objects developed to study ($1$-dimensional) supersymmetry representations. Jim Gates et al. have introduced \emph{gadgets} as an invariant studying pairs of adinkraic representations, which feature nice properties and some mysterious results for $n=4$, $k=1$ adinkras with some empirical computer-aided computation. In this paper, we compute gadgets symbolically and explain some of these observed phenomenon with group theory and combinatorics. Guided by this work, we give some suggestions for generalizations of the gadget to other parameters.
+\end{abstract}
+
+\maketitle
+
+
+\section{Introduction}
+
+TODO: describe adinkras
+
+We concentrate on the $n=4$, $k=1$ adinkra because that was the setup for \cite{gates:big_gadgets}
+
+TODO: describe Gadgets
+
+Let $V = B \cup F$ be the vertices decomposed into bosons and fermions. Recall from e.g. \cite{somewhere} that we can define operators $\phi_I^R: \ZZ_2V \rightarrow \ZZ_2V$ that corresponds to following the color $I$ and picking up a $\pm 1$ depending on if the edge is dashed. One can think of this as the matrix $\begin{bmatrix} 0 & L_I \\ L_I^T & 0 \end{bmatrix}$.
+
+For $I \neq J$, $V_{IJ}^R: \ZZ_2B \rightarrow \ZZ_2B$ is defined as $R_JL_I - R_IL_J$. Note that this is the same as $2R_JL_I$, as we know $R_JL_I = - R_IL_J$ (or more generally, $\phi^R_J\phi^R_I + \phi^R_I\phi^R_J = 0$ for $I \neq J$). Thus, we define $\phi_{IJ}^R$ as following the colors $I$ and $J$ (and picking up signs from the dashing) from a boson algebraically as 
+\[
+\phi_{IJ}^R = \phi_J^R \phi_I^R|_B = R_JL_I = L_J^TL_I,
+\] 
+where in the second expression we stress that the domain (and automatically the codomain) are restricted to $\ZZ_2B$ from $\ZZ_2V$. We now introduce a convenient auxiliary definition $\pi_{IJ} = B \rightarrow B$, which ``forgets'' about the sign of $\phi_{IJ}$ and only picks up the permutation. Note that $\pi_{IJ}$ are in fact \textbf{involutions}, meaning $\pi_{IJ}^2$ is the identity in the permutation group.
+
+For this paper, usually in context we fix a pair of adinkras $R$ and $R'$. When this happens, we use$\phi_I, \phi_{IJ}, V_{IJ}$, etc. to denote $\phi_I^R, \phi_{IJ}^R, V_{IJ}^R$ respectively, and use $\phi_I', \phi_{IJ}', V_{IJ}'$, etc. to denote $\phi_I^{R'}, \phi_{IJ}^{R'}, V_{IJ}^{R'}$ respectively. We also define $h_{IJ} = \phi_{IJ} \phi_{IJ}'$. The key object, defined as in \cite{gates:big_gadgets}, is
+\[
+G(R,R') = \sum_{I,J} Tr(V_{IJ}V_{IJ}') = \sum_{I,J} 4 Tr(\phi_{IJ} \phi_{IJ}') = \sum_{I,J} 4 Tr(h_{IJ}),
+\]
+which is called the \emph{gadget}. (we're probably off by some constant)
+
+TODO: some philosophy behind gadgets and their inspiration from character-theory-like considerations.
+
+We know from, e.g. \cite{zhang:combinatorics} that there are TODO $= 32684$ adinkras for $(n,k) = (4,1)$. \cite{gates:big_gadgets} noted that when they looked at all $32684^2$ pairs $(R,R')$ of adinkras, they obtained the following values:
+
+\begin{tabular}{cc}
+value & number of pairs \\
+\hline
+$1/3$ & $127,401,984$ \\ 
+$-0$ & $1,132,462,080$ \\
+$1/3$ & $84,934,656$ \\
+$1$ & $14,155,776$ 
+\end{tabular}
+
+In this paper, we explain this phenomenon and give some suggestions on how to proceed with the gadget for different $n$ and $k$.
+
+\section{Some Properties}
+
+\begin{lem}
+\label{lem:group}
+We have, for any distinct $I, J, K$ in $\{1,2,3,4\}$,
+\[
+\pi_{IJ} \pi_{IK} = \pi_{JK}.
+\]
+\end{lem}
+
+Recall from e.g. \cite{whichever} that an $n=4$, $k=1$ adinkra comes in exactly two ``chirality'' classes, depending on if $\phi_4\phi_3\phi_2\phi_1$ equals $1$ or $-1$ on all vertices in $V$. For an adinkra $R$, we call this quantity $s(R)$.
+
+\begin{lem}
+\label{lem:cover}
+We have, for any distinct $I < J$ in $\{1,2,3,4\}$, 
+\[
+h_{IJ} = h_{KL} s(R)s(R'),
+\]
+where $K < L$ are the remaining $2$ indices.
+\end{lem}
+\begin{proof}
+We do the proof for $I = 1$ and $J=2$; the other situations are similar.
+
+We know that $\phi_4\phi_3\phi_2\phi_1 = s(R)$. Thus, $\phi_4\phi_3 = \phi_1\phi_2 s(R) = - \phi_2 \phi_I s(R)$, meaning $\phi_{IJ} = - \phi_{KL} s(R)$ for this case. We also have $\phi_{IJ}' = - \phi_{KL}' s(R')$ by same reasoning on $R'$. Multiplying, we get $h_{IJ} = h_{KL} s(R)s(R')$. For other cases, we may get a different sign in front of the $\phi_{KL}$; however, as it always equals the same sign in front of $\phi_{KL}'$, the two signs cancel when we write $h_{IJ}$ in terms of $h_{KL}$.
+\end{proof}
+
+\begin{cor}
+\label{cor:twofold}
+We have, for any $R$ and $R'$,
+\[
+G(R,R') = 4[Tr(h_{12}) + Tr(h_{13}) + Tr(h_{23})](1 + s(R)s(R')).
+\]
+In particular, if $R$ and $R'$ have different chirality, then $G(R,R') = 0$.
+\end{cor}
+
+Lemma~\ref{lem:group} along with Lemma~\ref{lem:cover} shows that our gadget basically sums over (with some covering) the Klein-$4$ group. For higher $n$ and $k$ this is no longer true. We do not expect the gadget to be as ``nice'' a quantity.
+
+(TODO: a good replacement candidate would be to sum over the group of all codewords with even weight, which do form a group)
+
+For our specific case, what this tells us is that we can restrict to cases where $R,R'$ have the same chiralities; furthermore, we only have to worry about $h_{12}, h_{13}, h_{23}$.
+
+\section{Main Theorem}
+
+We know that $\phi_{12}, \phi_{13}, \phi_{23}$ pairs boson $1$ with $3$ different bosons, since otherwise two colors would overlap on some edge. Since the same is true of $\phi_{12}', \phi_{13}', \phi_{23}'$, there is an implicit permutation on the other $3$ bosons coming from how the $\phi_{IJ}'$ rearrange them versus how the $\phi_{IJ}$ do. Without loss of generality, suppose that $\phi_{12}, \phi_{13}, \phi{23}$ sends boson $1$ to $(2,3,4)$ respectively. Then there are $3$ cases for where $\phi_{12}', \phi_{13}', \phi_{23}'$ sends $1$:
+
+\begin{itemize}
+\item[(1)(1)(1)] $(2,3,4)$. This corresponds to the identity permutation in $S_3$.
+\item[(2)(1)] $(2,4,3)$, $(4,3,2)$, or $(3,2,4)$. These correspond to the $3$ permutations with cycle type $(2)(1)$ in $S_3$.
+\item[(3)] $(3,4,2)$ or $(4,2,3)$. These correspond to the $2$ $3$-cycle permutations in $S_3$.
+\end{itemize}
+
+Now, we get to see what happens to the trace in all of these cases. The key point is that if we have a $1$ cycle exactly when $\phi_{IJ}$ and $\phi_{IJ}'$ pairs vertex $1$ up with the same vertices. In other words, after we follow $\phi_{IJ}$ and then $\phi_{IJ}'$, we ended up at the original vertex. Thus, the $1$-cycles are exactly where we have contributions to the trace.
+
+\begin{itemize}
+\item[(3)] We do this first because the work is the easiest. Since there are no $1$-cycles, we have no contributions to the trace!
+\item[(2)(1)] $(2,4,3)$, $(4,3,2)$, or $(3,2,4)$. These correspond to the $3$ permutations with cycle type $(2)(1)$ in $S_3$. Thus, exactly one of the three $h_{IJ}$ contributes to the trace. WLOG it is $h_{12}$. This means going along colors $1$ and then $2$ swaps two pairs of vertices for both $R$ and $R'$. 
+
+TODO
+
+By symmetry, half of the time we contribute $4$ and half of the time we contribute $-4$.
+\item[(1)(1)(1)] $(2,3,4)$. This corresponds to the identity permutation in $S_3$.
+
+TODO
+
+\end{itemize}
+
+
+
+
+
+%\bibliographystyle{abbrv}
+% \bibliography{Adinkras}
+
+
+
+
+
+\end{document}
